@@ -35,16 +35,23 @@ implements SensorEventListener {
     	public void run(){
     		float decibel = (float) (20.0D * Math
 	                .log10(mRecorder.getMaxAmplitude()));
-			if(decibel > 90.0D && altitude > 0){
-				altitude++;
-			}else{
-				altitude--;
-			}
-			par.height = par.height - (10 - altitude);
-			par.width = par.width - (10 - altitude);
-			leaf.invalidate();
-			tvAltitude.setText(String.valueOf(altitude));
-			mHandler.postDelayed(afficheDecibel, 1000);
+    		if( altitude > 0){
+				if(decibel > 90.0D){
+					altitude++;
+					par.height++;
+					par.width++;
+					
+				}else{
+					altitude--;
+					par.height--;
+					par.width--;
+				}
+				tvAltitude.setText(String.valueOf(altitude));
+    		} else {
+    			tvAltitude.setText("Crash !!!");
+    		}
+			
+			mHandler.postDelayed(afficheDecibel, 500);
     	}
     };
 
@@ -88,7 +95,7 @@ implements SensorEventListener {
 			mRecorder.start();
 		    
 		    mHandler = new Handler();
-	        mHandler.postDelayed(afficheDecibel, 1000);
+	        mHandler.postDelayed(afficheDecibel, 500);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
