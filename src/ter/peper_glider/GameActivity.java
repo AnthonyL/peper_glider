@@ -2,6 +2,7 @@ package ter.peper_glider;
 
 import java.io.IOException;
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,28 +20,16 @@ import android.widget.TextView;
 public class GameActivity extends Activity
 implements SensorEventListener {
 
-	static final private double EMA_FILTER = 0.6;
     private MediaRecorder mRecorder = null;
-    private double mEMA = 0.0;
-
     SensorManager sm = null;
 	TextView tvGero;
-	private Handler mHandler;
-	private Runnable afficheDecibel = new Runnable () {
-    	public void run(){
-    		float decibel = (float) (20.0D * Math
-	                .log10(mRecorder.getMaxAmplitude()));
-			
-			Log.i("logMarker", "decibel " + decibel);
-			mHandler.postDelayed(afficheDecibel, 1000);
-    	}
-    };
-	
+	TextView tvAltitude;
+	int altitude = 10;
 	LayoutParams par;
 	ImageView leaf;
 	int widthView;
-	int heightView;
 	int posCenter;
+	int heightView;
 	
 	int posMax = 480;
 	
@@ -66,7 +55,34 @@ implements SensorEventListener {
     	}
     };
 	
+	private Handler mHandler;
+	private Runnable afficheDecibel = new Runnable () {
+    	public void run(){
+    		float decibel = (float) (20.0D * Math
+	                .log10(mRecorder.getMaxAmplitude()));
+    		if( altitude > 0){
+				if(decibel > 90.0D){
+					altitude++;
+					par.height++;
+					par.width++;
+					
+				}else{
+					altitude--;
+					par.height--;
+					par.width--;
+				}
+				tvAltitude.setText(String.valueOf(altitude));
+    		} else {
+    			tvAltitude.setText("Crash !!!");
+    		}
+			
+			mHandler.postDelayed(afficheDecibel, 500);
+    	}
+    };
+
 	
+	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,6 +90,7 @@ implements SensorEventListener {
 		setContentView(R.layout.activity_game);
 		
 		tvGero = (TextView) findViewById(R.id.tvGero);
+		tvAltitude = (TextView) findViewById(R.id.tvAltitude);
 		
 		Display display = getWindowManager().getDefaultDisplay(); 
 		int widthScreen = display.getWidth();  // deprecated height of game
@@ -111,10 +128,9 @@ implements SensorEventListener {
 		    mRecorder.setOutputFile("/dev/null");
 			mRecorder.prepare();
 			mRecorder.start();
-		    mEMA = 0.0;
 		    
 		    mHandler = new Handler();
-	        mHandler.postDelayed(afficheDecibel, 1000);
+	        mHandler.postDelayed(afficheDecibel, 500);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,6 +145,10 @@ implements SensorEventListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		this.onStop();
+		mRecorder.stop();
+		mHandler.removeCallbacks(afficheDecibel);
+		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 	
