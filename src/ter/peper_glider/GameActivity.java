@@ -24,6 +24,11 @@ implements SensorEventListener {
 	TextView tvGero;
 	TextView tvAltitude;
 	int altitude = 10;
+	LayoutParams par;
+	ImageView leaf;
+	int widthView;
+	int posCenter;
+	int heightView;
 	
 	private Handler mHandler;
 	private Runnable afficheDecibel = new Runnable () {
@@ -35,16 +40,14 @@ implements SensorEventListener {
 			}else{
 				altitude--;
 			}
+			par.height = par.height - (10 - altitude);
+			par.width = par.width - (10 - altitude);
+			leaf.invalidate();
 			tvAltitude.setText(String.valueOf(altitude));
 			mHandler.postDelayed(afficheDecibel, 1000);
     	}
     };
-	
-	LayoutParams par;
-	ImageView leaf;
-	int widthView;
-	int posCenter;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,7 +64,7 @@ implements SensorEventListener {
 		leaf = (ImageView)findViewById(R.id.imageView1);
 		
 
-		int heightView = leaf.getDrawable().getIntrinsicHeight();
+		heightView = leaf.getDrawable().getIntrinsicHeight();
 		widthView = leaf.getDrawable().getIntrinsicWidth();
 		tvGero.setText(heightView + " " + widthView);
 		
