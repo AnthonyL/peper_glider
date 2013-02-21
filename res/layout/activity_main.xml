@@ -1,14 +1,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    xmlns:app="http://schemas.android.com/apk/res/ter.peper_glider"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:id="@+id/LinearLayout1"
+    android:background="@drawable/paper_bider"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="10dp"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/textTitreApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAPER GLIDER"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="125dp"
+            android:text="Play"
+            android:width="150dp" />
+
+        <Button
+            android:id="@+id/buttonHighScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="High score"
+            android:width="150dp" />
+
+        <Button
+            android:id="@+id/buttonHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Help"
+            android:width="150dp" />
+
+        <Button
+            android:id="@+id/buttonExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Exit"
+            android:width="150dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="bottom|right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textLegendeApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="bottom|right"
+            android:text="by ANDROS"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    
 </LinearLayout>

@@ -31,22 +31,32 @@
 		        android:orientation="vertical">
 		
 			    <TextView
-		            android:id="@+id/textTitreApp"
+		            android:id="@+id/textTitreHelp"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 	            	android:layout_marginTop="25dp"
-		            android:text="High score :"
+		            android:text="Help :"
 		            android:textSize="25sp"
 		            android:textStyle="bold" />
 			    
 			    <TextView
-		            android:id="@+id/textTitreApp"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-	            	android:layout_marginTop="25dp"
-		            android:text="0 sec."
-		            android:textSize="25sp"
-		            android:textStyle="bold" />
+			        android:id="@+id/textHelp1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="50dp"
+			        android:text="The goal is to cross a forest to a paper glider avoiding trees"
+			        android:textSize="20sp"
+			        android:textStyle="bold" />
+			    
+			    <TextView
+			        android:id="@+id/textHelp2"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="30dp"
+			        android:text="Must blow on the microphone to raise the paper glider, otherwise it descends slowly"
+			        android:textSize="20sp"
+			        android:textStyle="bold" />
+
 		    </LinearLayout>    
 	        
 	    </LinearLayout>
@@ -57,20 +67,12 @@
         android:baselineAligned="false"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/buttonPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
-            android:text="Play again"
-            android:width="150dp" />
 	
         <Button
             android:id="@+id/buttonReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:text="Return"
             android:width="150dp" />
     </LinearLayout>
