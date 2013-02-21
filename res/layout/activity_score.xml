@@ -31,7 +31,7 @@
 		        android:orientation="vertical">
 		
 			    <TextView
-		            android:id="@+id/textTitreApp"
+		            android:id="@+id/textTitreScore"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 	            	android:layout_marginTop="25dp"
@@ -40,7 +40,7 @@
 		            android:textStyle="bold" />
 			    
 			    <TextView
-		            android:id="@+id/textTitreApp"
+		            android:id="@+id/textScore"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 	            	android:layout_marginTop="25dp"

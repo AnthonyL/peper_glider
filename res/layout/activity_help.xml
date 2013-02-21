@@ -44,7 +44,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginTop="50dp"
-			        android:text="The goal is to cross a forest to a paper glider avoiding trees"
+			        android:text="The goal is to cross a forest with a paper glider avoiding trees"
 			        android:textSize="20sp"
 			        android:textStyle="bold" />
 			    
@@ -72,7 +72,7 @@
             android:id="@+id/buttonReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:text="Return"
             android:width="150dp" />
     </LinearLayout>
