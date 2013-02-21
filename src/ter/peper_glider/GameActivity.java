@@ -1,11 +1,15 @@
 package ter.peper_glider;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
@@ -13,8 +17,22 @@ import android.widget.TextView;
 public class GameActivity extends Activity
 implements SensorEventListener {
 	
+	static final private double EMA_FILTER = 0.6;
+    private MediaRecorder mRecorder = null;
+    private double mEMA = 0.0;
+    
 	SensorManager sm = null;
 	TextView tvGero;
+	private Handler mHandler;
+	private Runnable afficheDecibel = new Runnable () {
+    	public void run(){
+    		float decibel = (float) (20.0D * Math
+	                .log10(mRecorder.getMaxAmplitude()));
+			
+			Log.i("logMarker", "decibel " + decibel);
+			mHandler.postDelayed(afficheDecibel, 1000);
+    	}
+    };
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +40,32 @@ implements SensorEventListener {
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		setContentView(R.layout.activity_game);
 		tvGero = (TextView) findViewById(R.id.tvGero);
+		
+		 
+	    try {
+	    	mRecorder = new MediaRecorder();
+	        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+		    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		    mRecorder.setOutputFile("/dev/null");
+			mRecorder.prepare();
+			mRecorder.start();
+		    mEMA = 0.0;
+		    
+		    mHandler = new Handler();
+	        mHandler.postDelayed(afficheDecibel, 1000);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,6 +103,14 @@ implements SensorEventListener {
 	protected void onStop() {
 	    sm.unregisterListener(this, sm.getDefaultSensor(Sensor.TYPE_ORIENTATION));
 	    super.onStop();
+	}
+	
+	public double getAmplitude() {
+	        if (mRecorder != null)
+	                return  (mRecorder.getMaxAmplitude()/2700.0);
+	        else
+	                return 0;
+	
 	}
 
 }
