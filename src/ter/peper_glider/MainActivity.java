@@ -56,5 +56,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.item1:
+				System.exit(RESULT_OK);
+		}
+		return true;
+	}
 }

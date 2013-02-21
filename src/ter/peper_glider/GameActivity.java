@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -114,7 +115,15 @@ implements SensorEventListener {
 		this.onStop();
 		mRecorder.stop();
 		mHandler.removeCallbacks(afficheDecibel);
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.activity_game, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.item1:
+				System.exit(RESULT_OK);
+		}
 		return true;
 	}
 	
