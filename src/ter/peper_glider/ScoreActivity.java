@@ -19,6 +19,7 @@ public class ScoreActivity extends Activity {
 		bPlay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 		    	Intent myIntent = new Intent(view.getContext(), GameActivity.class);
+            	myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    	startActivity(myIntent);
             }
         });
@@ -27,6 +28,7 @@ public class ScoreActivity extends Activity {
 		buttonReturn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 		    	Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+            	myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    	startActivity(myIntent);
             }
         });
