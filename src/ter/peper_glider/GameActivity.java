@@ -2,6 +2,7 @@ package ter.peper_glider;
 
 import java.io.IOException;
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -110,6 +111,10 @@ implements SensorEventListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		this.onStop();
+		mRecorder.stop();
+		mHandler.removeCallbacks(afficheDecibel);
+		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 	
