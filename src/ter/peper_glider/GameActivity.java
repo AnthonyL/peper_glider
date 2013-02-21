@@ -62,7 +62,6 @@ implements SensorEventListener {
 		int heightScreen = display.getHeight();  // deprecated width of game
 
 		leaf = (ImageView)findViewById(R.id.imageView1);
-		
 
 		heightView = leaf.getDrawable().getIntrinsicHeight();
 		widthView = leaf.getDrawable().getIntrinsicWidth();
@@ -74,7 +73,7 @@ implements SensorEventListener {
 		par = (LayoutParams)leaf.getLayoutParams();
 		
 		par.leftMargin = posCenter;
-		par.topMargin = 10;
+		par.topMargin = 30;
 
 		leaf.setLayoutParams(par);
 		leaf.invalidate();
@@ -124,14 +123,14 @@ implements SensorEventListener {
         	  float direction_y = values[1];
         	  float direction_z = values[2];
         	  //tvGero.setText("x: "+String.valueOf(direction_x)+" y: "+String.valueOf(direction_y)+" z : "+String.valueOf(direction_z));
+        	  
         	  par = (LayoutParams)leaf.getLayoutParams();
-      		
         	  int pos = par.leftMargin;
         	  tvGero.setText(((Float)direction_z).intValue() + "toto : "+pos);
         	  
-        	  if (pos>=320 || pos<=0){
+        	  if (pos<=(320-widthView) && pos>=0){
         		  tvGero.setText("bordure : "+pos);
-        		  par.leftMargin =((Float)direction_z).intValue();
+        		  par.leftMargin =((Float)direction_z).intValue()+posCenter;
   				
   				
   				leaf.setLayoutParams(par);
