@@ -16,19 +16,23 @@ import android.widget.TextView;
 public class GameActivity extends Activity
 implements SensorEventListener {
 
-	static final private double EMA_FILTER = 0.6;
     private MediaRecorder mRecorder = null;
-    private double mEMA = 0.0;
-
     SensorManager sm = null;
 	TextView tvGero;
+	TextView tvAltitude;
+	int altitude = 10;
+	
 	private Handler mHandler;
 	private Runnable afficheDecibel = new Runnable () {
     	public void run(){
     		float decibel = (float) (20.0D * Math
 	                .log10(mRecorder.getMaxAmplitude()));
-			
-			Log.i("logMarker", "decibel " + decibel);
+			if(decibel > 90.0D && altitude > 0){
+				altitude++;
+			}else{
+				altitude--;
+			}
+			tvAltitude.setText(String.valueOf(altitude));
 			mHandler.postDelayed(afficheDecibel, 1000);
     	}
     };
@@ -39,6 +43,7 @@ implements SensorEventListener {
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		setContentView(R.layout.activity_game);
 		tvGero = (TextView) findViewById(R.id.tvGero);
+		tvAltitude = (TextView) findViewById(R.id.tvAltitude);
 		
 		 
 	    try {
@@ -49,7 +54,6 @@ implements SensorEventListener {
 		    mRecorder.setOutputFile("/dev/null");
 			mRecorder.prepare();
 			mRecorder.start();
-		    mEMA = 0.0;
 		    
 		    mHandler = new Handler();
 	        mHandler.postDelayed(afficheDecibel, 1000);
