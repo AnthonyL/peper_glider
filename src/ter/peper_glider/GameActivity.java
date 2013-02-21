@@ -32,6 +32,30 @@ implements SensorEventListener {
 	int posCenter;
 	int heightView;
 	
+	int posMax = 480;
+	
+	private Handler mHandlerTimer;
+	private Runnable timer = new Runnable () {
+		public void run(){
+//    		float decibel = (float) (20.0D * Math
+//	                .log10(mRecorder.getMaxAmplitude()));
+			par = (LayoutParams)leaf.getLayoutParams();
+			int posX = par.topMargin;
+      	  	
+			posMax = 480 - heightView;
+			
+			tvGero.setText("posX : " + posX);
+			if (par.topMargin < posMax){
+				par.topMargin ++;
+			}
+			
+			leaf.setLayoutParams(par);
+			leaf.invalidate();
+      	 
+			mHandlerTimer.postDelayed(timer, 50);
+    	}
+    };
+	
 	private Handler mHandler;
 	private Runnable afficheDecibel = new Runnable () {
     	public void run(){
@@ -57,6 +81,9 @@ implements SensorEventListener {
     	}
     };
 
+	
+	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,6 +97,10 @@ implements SensorEventListener {
 		int widthScreen = display.getWidth();  // deprecated height of game
 		int heightScreen = display.getHeight();  // deprecated width of game
 
+		
+		//ImageView herbe = (ImageView)findViewById(R.id.imageView2);
+		
+		
 		leaf = (ImageView)findViewById(R.id.imageView1);
 
 		heightView = leaf.getDrawable().getIntrinsicHeight();
@@ -86,6 +117,9 @@ implements SensorEventListener {
 
 		leaf.setLayoutParams(par);
 		leaf.invalidate();
+		
+		mHandlerTimer = new Handler();
+		mHandlerTimer.postDelayed(timer, 1000);
 		 
 	    try {
 	    	mRecorder = new MediaRecorder();
@@ -149,9 +183,9 @@ implements SensorEventListener {
         	  int pos = par.leftMargin;
         	  tvGero.setText(((Float)direction_z).intValue() + "toto : "+pos);
         	  
-        	  if (pos<=(320-widthView) && pos>=0){
+        	  if (pos<=320 && pos>=0){
         		  tvGero.setText("bordure : "+pos);
-        		  par.leftMargin =((Float)direction_z).intValue()+posCenter;
+        		  par.leftMargin =((Float)direction_z).intValue()*2+posCenter;
   				
   				
   				leaf.setLayoutParams(par);

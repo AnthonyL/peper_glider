@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_gravity="fill_horizontal" >
+    android:layout_gravity="fill_horizontal" 
+    android:background="@drawable/herbe">
 
     <TextView
         android:id="@+id/tvGero"
@@ -14,14 +15,12 @@
         android:paddingTop="0dp"
         android:text="TextView" />
     
-    <ImageView
+     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         
         android:src="@drawable/glider" />
-    
-    
 
     <TextView
         android:id="@+id/tvAltitude"
