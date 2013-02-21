@@ -2,6 +2,7 @@ package ter.peper_glider;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -9,6 +10,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/*Intent myIntent = new Intent(, GameActivity.class);
+		startActivity(myIntent);*/
 		setContentView(R.layout.activity_main);
 	}
 
